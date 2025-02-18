@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
-
+import os
 app = Flask(__name__)
 
 # Load the trained model
@@ -17,5 +17,6 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Use the PORT assigned by Render
+    app.run(host="0.0.0.0", port=port)
